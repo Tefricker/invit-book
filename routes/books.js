@@ -31,7 +31,6 @@ router.get('/:isbn', function(req, res, next) {
 //add
 router.post('/', function(req, res, next) {
   let values = req.body;
-  console.log(values)
   
     values.release_date = parseInt(values.release_date)
   

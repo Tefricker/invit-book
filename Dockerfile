@@ -4,6 +4,8 @@ WORKDIR /opt/app
 RUN adduser --disabled-password app
 COPY . .
 RUN chown -R app:app /opt/app
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
 USER app
 RUN npm install
 EXPOSE 8070

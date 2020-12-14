@@ -6,11 +6,11 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: motdepasse
+      POSTGRES_PASSWORD: postgres
     ports: 
       - '5432:5432'
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - invitbook-db:/var/lib/postgresql/data
 
   invitbook:
     build:
@@ -18,12 +18,14 @@ services:
     environment:
       DB_SCHEMA: postgres
       DB_USER: postgres
-      DB_PASSWORD: motdepasse
+      DB_PASSWORD: postgres
       DB_HOST: postgres
     depends_on:
       - postgres
     ports:
       - '8070:8070'
+    restart: on-failure
+
         
 volumes:
-  postgres:
+  invitbook-db:
