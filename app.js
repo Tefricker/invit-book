@@ -6,7 +6,8 @@ var logger = require('morgan');
 var booksRouter = require('./routes/books');
 var app = express();
 const bodyParser = require('body-parser');
-
+const PORT = 8070;
+const HOST = '0.0.0.0';
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -26,12 +27,12 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
-  console.log(err);
+  console.log(err)
   res.send('error');
 });
 
-app.listen(81,"51.178.19.74", () => {
-  console.log(`Example app listening at http://localhost:3631`)
+app.listen(PORT,HOST, () => {
+  console.log(`Example app listening at http://localhost:8070`)
 })
 
 

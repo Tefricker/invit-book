@@ -3,7 +3,7 @@ var router = express.Router();
 var books = require('../models/books');
 
 //get global
-router.get('/', function(req, res) {
+router.get('/', function(req, res, next) {
   let result = books.getAll(function(result){
     if (result!=='error'){
       res.json(result)
@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
 //get specific
 router.get('/:isbn', function(req, res, next) {
   let isbn = req.params.isbn;
-  console.log(isbn)
+
   books.getOne(isbn,function(result){
     if (result!=='error'){
       res.json(result)
@@ -31,9 +31,10 @@ router.get('/:isbn', function(req, res, next) {
 //add
 router.post('/', function(req, res, next) {
   let values = req.body;
-  if (!isInteger(values.release_date)){
+  console.log(values)
+  
     values.release_date = parseInt(values.release_date)
-  }
+  
   books.postOne(values, function(result){
     if (result!=='error'){
       res.json(result)
@@ -47,9 +48,9 @@ router.post('/', function(req, res, next) {
 //update
 router.post('/:isbn', function(req, res, next) {
   let values = req.body;
-  if (!isInteger(values.release_date)){
+  
     values.release_date = parseInt(values.release_date)
-  }
+  
   let isbn = req.params.isbn;
   books.updateOne(isbn,values, function(result){
     if (result!=='error'){

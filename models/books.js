@@ -1,13 +1,34 @@
 const { Pool } = require("pg");
-const pool = new Pool();
+const pool = new Pool(
+    {
+        user: 'postgres',
+        host: 'localhost',
+        database: 'postgres',
+        password: 'motdepasse',
+        port: 5432,
+      }
+);
 
 console.log("pool start")
 
 
+
+
+
 pool.on("error", (err, client) => {
-  console.error("Unexpected error", err)
   process.exit(-1)
 })
+
+//Initialising table
+pool.query("CREATE TABLE books (isbn VARCHAR(100), name VARCHAR(100), author VARCHAR(100),release_date integer)", (err, res) => {
+    console.log(res)
+})
+
+
+//First data, exemple
+pool.query("INSERT INTO books (isbn, name, author, release_date) VALUES ('423432JGGH', 'La carte et le territoire', 'Michel Houellebecq', 15641513);", (err, res) => {
+    
+}) 
 
 //returning ALL books
 getAll = (cb) => {
@@ -40,6 +61,7 @@ postOne = (values, cb) => {
         }
         else{
             cb('error')
+
         }
       }) 
 }

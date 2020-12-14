@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "pm2": "pm2 start processes.json --no-daemon",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -12,6 +13,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "pm2": "^4.5.0"
   }
 }
